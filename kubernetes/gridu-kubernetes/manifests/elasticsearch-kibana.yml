@@ -1,0 +1,57 @@
+# based on https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-quickstart.html
+
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: quickstart
+spec:
+  version: 7.15.2
+  nodeSets:
+  - name: default
+    count: 2
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data # Do not change this name unless you set up a volume mount for the data path.
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+    config:
+      node.store.allow_mmap: false # Has performance implications and should be turned for production
+    podTemplate:
+      spec:
+        containers:
+          - name: elasticsearch
+            resources:
+              requests:
+                memory: 2Gi
+                cpu: 0.25
+
+---
+
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: quickstart
+spec:
+  version: 7.15.2
+  count: 1
+  elasticsearchRef:
+    name: quickstart
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+    service:
+      spec:
+        type: NodePort
+  podTemplate:
+    spec:
+      containers:
+        - name: kibana
+          resources:
+            requests:
+              memory: 0.5Gi
+              cpu: 0.25

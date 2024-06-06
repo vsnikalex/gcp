@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myafk-pod
+spec:
+  containers:
+    - name: test-container
+      image: quay.io/myafk/interactive:stable
+      command: [ "interactive", "config", "-t=first", "GRIDU_CONFIGMAP_ENV", "$(GRIDU_CONFIGMAP_ENV)" ]
+      resources:
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      env:
+        # Define the environment variable
+        - name: GRIDU_CONFIGMAP_ENV
+          valueFrom:
+            configMapKeyRef:
+              # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
+              name: env-config
+              # Specify the key associated with the value
+              key: GRIDU_CONFIGMAP_ENV
+  restartPolicy: Never

@@ -1,0 +1,8 @@
+plugin: gcp_compute
+projects:
+  - sixth-episode-315107
+auth_kind: serviceaccount
+service_account_file: ~/.ssh/gcp_account.json
+keyed_groups:
+  - key: tags['items']
+    prefix: gcp

@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-config
+data:
+  FIRST_RUN_HASH: 0208c0615d7aff81fafc87c7499330215d5f8a4d
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: quay.io/myafk/interactive:stable
+        command: ["interactive", "workloads", "-t=second"]
+        env:
+          - name: FIRST_RUN_HASH
+            valueFrom:
+              configMapKeyRef:
+                key: FIRST_RUN_HASH
+                name: env-config
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
