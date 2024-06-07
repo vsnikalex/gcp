@@ -18,7 +18,8 @@ spec:
         resources:
           limits:
             memory: "128Mi"
-            cpu: "500m"        
+            cpu: "500m"
+            ephemeral-storage: "128M"
         volumeMounts:
         - mountPath: /redis-master-data
           name: data
@@ -71,7 +72,8 @@ spec:
         resources:
           limits:
             memory: "128Mi"
-            cpu: "500m"        
+            cpu: "500m"
+            ephemeral-storage: "128M"
         volumeMounts:
         - name: data
           mountPath: /redis-slave-data

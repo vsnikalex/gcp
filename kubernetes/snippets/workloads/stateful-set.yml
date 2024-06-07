@@ -49,6 +49,11 @@ spec:
         ports:
         - containerPort: 80
           name: web
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+            ephemeral-storage: "128M"
         volumeMounts:
         - name: myvolume
           mountPath: /usr/myafk
