@@ -20,3 +20,4 @@ spec:
       configMap:
         name: env-config
   restartPolicy: Never
+  automountServiceAccountToken: false

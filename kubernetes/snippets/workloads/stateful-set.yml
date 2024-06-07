@@ -57,6 +57,7 @@ spec:
         volumeMounts:
         - name: myvolume
           mountPath: /usr/myafk
+      automountServiceAccountToken: false
   volumeClaimTemplates:
   - metadata:
       name: myvolume

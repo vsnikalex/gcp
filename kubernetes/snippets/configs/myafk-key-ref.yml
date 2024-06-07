@@ -21,3 +21,4 @@ spec:
               # Specify the key associated with the value
               key: GRIDU_CONFIGMAP_ENV
   restartPolicy: Never
+  automountServiceAccountToken: false

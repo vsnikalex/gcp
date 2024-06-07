@@ -27,6 +27,7 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 8085
+      automountServiceAccountToken: false
 
 ---
 
