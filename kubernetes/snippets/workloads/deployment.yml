@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: env-config
 data:
-  FIRST_RUN_HASH: 0208c0615d7aff81fafc87c7499330215d5f8a4d
+  FIRST_RUN_HASH: "0208c0615d7aff81fafc87c7499330215d5f8a4d"
 
 ---
 
